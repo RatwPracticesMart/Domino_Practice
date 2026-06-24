@@ -11,8 +11,8 @@ body {
     font-family: Arial, sans-serif;
     background: #f2f2f2;
     color: black;
-    overflow: auto;
-    /* Allow scrolling if needed */
+    overflow: hidden;
+    position: fixed;
 }
 
 #rotateWarning {
@@ -20,102 +20,101 @@ body {
 }
 
 /* ===================================== */
-/* TOP BAR - STICKY */
+/* TOP BAR - MINIMAL */
 /* ===================================== */
 
 .top-bar {
     text-align: center;
-    padding: 8px 5px;
+    padding: 3px 5px;
     flex-shrink: 0;
     background: #f2f2f2;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: auto;
+    min-height: 32px;
     border-bottom: 1px solid #ddd;
 }
 
 #info {
-    font-size: clamp(14px, 2.5vw, 28px);
-    margin-bottom: 2px;
+    font-size: clamp(10px, 1.5vh, 18px);
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 60px;
 }
 
 #timer {
-    font-size: clamp(12px, 2vw, 20px);
-    margin-bottom: 4px;
+    font-size: clamp(9px, 1.3vh, 15px);
+    margin: 0;
+    flex: 0 1 auto;
 }
 
 #startBtn,
 #resetBtn {
-    padding: 6px 14px;
-    font-size: clamp(10px, 1.5vw, 16px);
+    padding: 3px 8px;
+    font-size: clamp(8px, 1.2vh, 13px);
     cursor: pointer;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     background: #3b82f6;
     color: white;
-    margin: 2px;
     touch-action: manipulation;
-}
-
-#startBtn:hover,
-#resetBtn:hover {
-    opacity: .9;
+    flex: 0 1 auto;
+    white-space: nowrap;
 }
 
 /* ===================================== */
-/* MAIN LAYOUT - SCROLLABLE */
+/* GAME CONTAINER - FILLS ALL SPACE */
 /* ===================================== */
 
 .game-container {
     display: flex;
-    justify-content: flex-start;
-    /* Align to left */
-    align-items: flex-start;
-    gap: clamp(10px, 2vw, 30px);
-    padding: clamp(8px, 1.5vh, 20px);
-    min-height: calc(100vh - 80px);
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    height: calc(100vh - 40px);
     width: 100%;
+    overflow: hidden;
 }
 
 /* ===================================== */
-/* LEFT SIDE - FIXED POSITION, NEVER MOVES */
+/* LEFT SIDE - FIXED WIDTH, FULL HEIGHT */
 /* ===================================== */
 
 .targets-panel {
-    width: clamp(180px, 22vw, 300px);
+    width: clamp(80px, 15vw, 180px);
     flex-shrink: 0;
-    /* Never shrink */
     flex-grow: 0;
-    /* Never grow */
-    position: sticky;
-    /* Stays in view */
-    top: 80px;
-    /* Below top bar */
-    align-self: flex-start;
-    padding-top: 5px;
-    background: #f2f2f2;
-    /* Match background */
-    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    justify-content: center;
 }
 
 .targets-title {
     text-align: center;
-    font-size: clamp(16px, 2.5vw, 32px);
-    margin-bottom: clamp(5px, 1vh, 10px);
+    font-size: clamp(9px, 1.3vh, 18px);
+    margin-bottom: 4px;
     line-height: 1.2;
+    flex-shrink: 0;
 }
 
 .targets-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(4px, 0.8vh, 10px);
+    gap: 4px;
     justify-content: center;
-    max-width: 300px;
-    margin: 0 auto;
+    flex: 1;
+    align-content: center;
+    max-height: 100%;
 }
 
 /* ===================================== */
-/* RIGHT SIDE - ZOOMS AND SCROLLS */
+/* RIGHT SIDE - FLEXIBLE, FITS PERFECTLY */
 /* ===================================== */
 
 .board-panel {
@@ -123,24 +122,25 @@ body {
     min-width: 0;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    overflow: auto;
-    padding: 5px;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
 }
 
 .board-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: clamp(2px, 0.4vh, 5px);
+    gap: 2px;
     justify-content: center;
     width: 100%;
-    max-width: 1000px;
-    min-width: 500px;
-    /* Ensures dominoes have minimum size */
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 7 / 4;
 }
 
 /* ===================================== */
-/* DOMINOES */
+/* DOMINOES - PERFECT FIT */
 /* ===================================== */
 
 .domino {
@@ -150,8 +150,8 @@ body {
     touch-action: manipulation;
     aspect-ratio: 3 / 4;
     width: 100%;
-    max-width: clamp(60px, 10vw, 130px);
-    min-width: 45px;
+    height: 100%;
+    min-height: 0;
 }
 
 .domino img {
@@ -164,8 +164,8 @@ body {
 .target-domino {
     aspect-ratio: 3 / 4;
     width: 100%;
-    max-width: clamp(80px, 12vw, 150px);
-    min-width: 55px;
+    height: 100%;
+    min-height: 0;
 }
 
 .target-domino img {
@@ -200,7 +200,7 @@ body {
         justify-content: center;
         align-items: center;
         text-align: center;
-        font-size: clamp(20px, 5vw, 30px);
+        font-size: clamp(16px, 4vw, 28px);
         font-weight: bold;
         z-index: 99999;
         padding: 20px;
@@ -208,204 +208,177 @@ body {
 }
 
 /* ===================================== */
-/* ZOOM OUT MORE ON SMALL SCREENS */
+/* LANDSCAPE - ALL DEVICES */
 /* ===================================== */
 
-/* Tablet Landscape */
-@media screen and (max-width: 1024px) and (orientation:landscape) {
+/* Large screens (desktop/tablet) */
+@media screen and (min-width: 1025px) and (orientation:landscape) {
     .targets-panel {
         width: 200px;
     }
-
+    
     .targets-title {
-        font-size: 22px;
+        font-size: 24px;
     }
-
-    .targets-grid {
-        gap: 5px;
-    }
-
+    
     .board-grid {
-        gap: 3px;
-        min-width: 400px;
-    }
-
-    .domino {
-        max-width: 100px;
-        min-width: 40px;
-    }
-
-    .target-domino {
-        max-width: 120px;
-        min-width: 50px;
+        gap: 4px;
+        max-width: 900px;
+        max-height: 90%;
     }
 }
 
-/* Mobile Landscape - More zoomed out */
-@media screen and (max-width: 900px) and (orientation:landscape) {
-    .top-bar {
-        padding: 4px 5px;
-    }
-
-    #info {
-        font-size: 16px;
-    }
-
-    #timer {
-        font-size: 13px;
-    }
-
-    #startBtn,
-    #resetBtn {
-        padding: 4px 10px;
-        font-size: 11px;
-    }
-
-    .game-container {
-        gap: 8px;
-        padding: 5px;
-        min-height: calc(100vh - 65px);
-    }
-
+/* Tablets */
+@media screen and (max-width: 1024px) and (orientation:landscape) {
     .targets-panel {
         width: 150px;
-        top: 60px;
     }
-
+    
     .targets-title {
-        font-size: 15px;
-        margin-bottom: 4px;
+        font-size: 16px;
     }
-
+    
     .targets-grid {
         gap: 3px;
     }
-
+    
     .board-grid {
         gap: 2px;
-        min-width: 320px;
-    }
-
-    .domino {
-        max-width: 75px;
-        min-width: 32px;
-    }
-
-    .target-domino {
-        max-width: 90px;
-        min-width: 40px;
     }
 }
 
-/* Small Phones - Even more zoomed out */
-@media screen and (max-width: 700px) and (orientation:landscape) {
+/* Mobile phones - PERFECT FIT */
+@media screen and (max-width: 900px) and (orientation:landscape) {
     .top-bar {
-        padding: 3px 3px;
+        min-height: 28px;
+        padding: 2px 4px;
     }
-
+    
     #info {
-        font-size: 13px;
+        font-size: 12px;
     }
-
+    
     #timer {
-        font-size: 11px;
+        font-size: 10px;
     }
-
-    #startBtn,
-    #resetBtn {
-        padding: 3px 8px;
-        font-size: 9px;
-    }
-
-    .game-container {
-        gap: 5px;
-        padding: 3px;
-        min-height: calc(100vh - 50px);
-    }
-
-    .targets-panel {
-        width: 110px;
-        top: 50px;
-    }
-
-    .targets-title {
-        font-size: 11px;
-        margin-bottom: 3px;
-    }
-
-    .targets-grid {
-        gap: 2px;
-    }
-
-    .board-grid {
-        gap: 1.5px;
-        min-width: 250px;
-    }
-
-    .domino {
-        max-width: 55px;
-        min-width: 25px;
-    }
-
-    .target-domino {
-        max-width: 65px;
-        min-width: 30px;
-    }
-}
-
-/* Very Small Phones - Maximum zoom out */
-@media screen and (max-width: 500px) and (orientation:landscape) {
-    .top-bar {
-        padding: 2px 2px;
-    }
-
-    #info {
-        font-size: 11px;
-    }
-
-    #timer {
-        font-size: 9px;
-    }
-
+    
     #startBtn,
     #resetBtn {
         padding: 2px 6px;
+        font-size: 9px;
+    }
+    
+    .game-container {
+        height: calc(100vh - 34px);
+        gap: 4px;
+        padding: 3px 5px;
+    }
+    
+    .targets-panel {
+        width: 110px;
+    }
+    
+    .targets-title {
+        font-size: 11px;
+        margin-bottom: 2px;
+    }
+    
+    .targets-grid {
+        gap: 2px;
+    }
+    
+    .board-grid {
+        gap: 1.5px;
+    }
+}
+
+/* Small phones */
+@media screen and (max-width: 700px) and (orientation:landscape) {
+    .top-bar {
+        min-height: 24px;
+        padding: 2px 3px;
+    }
+    
+    #info {
+        font-size: 10px;
+    }
+    
+    #timer {
+        font-size: 9px;
+    }
+    
+    #startBtn,
+    #resetBtn {
+        padding: 2px 5px;
         font-size: 8px;
     }
-
+    
     .game-container {
+        height: calc(100vh - 28px);
         gap: 3px;
-        padding: 2px;
-        min-height: calc(100vh - 40px);
+        padding: 2px 4px;
     }
-
+    
     .targets-panel {
-        width: 80px;
-        top: 40px;
+        width: 85px;
     }
-
+    
     .targets-title {
         font-size: 9px;
         margin-bottom: 2px;
     }
-
+    
     .targets-grid {
         gap: 1.5px;
     }
-
+    
     .board-grid {
         gap: 1px;
-        min-width: 180px;
     }
+}
 
-    .domino {
-        max-width: 40px;
-        min-width: 20px;
+/* Very small phones */
+@media screen and (max-width: 500px) and (orientation:landscape) {
+    .top-bar {
+        min-height: 20px;
+        padding: 1px 2px;
     }
-
-    .target-domino {
-        max-width: 45px;
-        min-width: 22px;
+    
+    #info {
+        font-size: 8px;
+    }
+    
+    #timer {
+        font-size: 7px;
+    }
+    
+    #startBtn,
+    #resetBtn {
+        padding: 1px 4px;
+        font-size: 7px;
+    }
+    
+    .game-container {
+        height: calc(100vh - 22px);
+        gap: 2px;
+        padding: 2px 3px;
+    }
+    
+    .targets-panel {
+        width: 65px;
+    }
+    
+    .targets-title {
+        font-size: 7px;
+        margin-bottom: 1px;
+    }
+    
+    .targets-grid {
+        gap: 1px;
+    }
+    
+    .board-grid {
+        gap: 0.5px;
     }
 }
 
@@ -425,39 +398,16 @@ body {
 }
 
 /* ===================================== */
-/* SCROLLBAR STYLING */
-/* ===================================== */
-
-::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-}
-
-::-webkit-scrollbar-track {
-    background: #e0e0e0;
-    border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* ===================================== */
 /* SAFE AREA FOR NOTCH PHONES */
 /* ===================================== */
 
 @supports (padding: max(0px)) {
     .top-bar {
-        padding-left: max(10px, env(safe-area-inset-left));
-        padding-right: max(10px, env(safe-area-inset-right));
-        padding-top: max(10px, env(safe-area-inset-top));
+        padding-left: max(5px, env(safe-area-inset-left));
+        padding-right: max(5px, env(safe-area-inset-right));
+        padding-top: max(3px, env(safe-area-inset-top));
     }
-
+    
     .game-container {
         padding-left: max(5px, env(safe-area-inset-left));
         padding-right: max(5px, env(safe-area-inset-right));
