@@ -9,6 +9,7 @@ body{
     width:100%;
     height:100%;
     overflow-x:hidden;
+    overflow-y:hidden;
     font-family:Arial,sans-serif;
     background:#f2f2f2;
     color:black;
@@ -24,29 +25,29 @@ body{
 
 .top-bar{
     text-align:center;
-    padding:15px;
+    padding:10px;
 }
 
 #info{
-    font-size:32px;
-    margin-bottom:5px;
+    font-size:30px;
+    margin-bottom:3px;
 }
 
 #timer{
-    font-size:22px;
-    margin-bottom:10px;
+    font-size:20px;
+    margin-bottom:6px;
 }
 
 #startBtn,
 #resetBtn{
-    padding:12px 24px;
-    font-size:18px;
+    padding:10px 20px;
+    font-size:16px;
     cursor:pointer;
     border:none;
     border-radius:10px;
     background:#3b82f6;
     color:white;
-    margin:5px;
+    margin:4px;
 }
 
 #startBtn:hover,
@@ -62,8 +63,8 @@ body{
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    gap:30px;
-    padding:10px;
+    gap:20px;
+    padding:5px;
 }
 
 /* ===================================== */
@@ -71,19 +72,19 @@ body{
 /* ===================================== */
 
 .targets-panel{
-    width:340px;
+    width:320px;
 }
 
 .targets-title{
     text-align:center;
-    font-size:42px;
-    margin-bottom:20px;
+    font-size:38px;
+    margin-bottom:12px;
 }
 
 .targets-grid{
     display:grid;
     grid-template-columns:repeat(2,140px);
-    gap:12px;
+    gap:10px;
     justify-content:center;
 }
 
@@ -98,7 +99,7 @@ body{
 .board-grid{
     display:grid;
     grid-template-columns:repeat(7,120px);
-    gap:4px;
+    gap:3px;
     justify-content:center;
 }
 
@@ -108,8 +109,8 @@ body{
 
 .domino{
     position:relative;
-    user-select:none;
     cursor:pointer;
+    user-select:none;
 }
 
 .domino img{
@@ -149,7 +150,7 @@ body{
         justify-content:center;
         align-items:center;
         text-align:center;
-        font-size:30px;
+        font-size:28px;
         font-weight:bold;
         z-index:99999;
     }
@@ -161,52 +162,58 @@ body{
 
 @media screen and (max-width:900px){
 
-    .game-container{
-        gap:10px;
-        padding:5px;
-    }
-
-    .targets-panel{
-        width:220px;
-    }
-
-    .targets-title{
-        font-size:24px;
-        margin-bottom:10px;
-    }
-
-    .targets-grid{
-        grid-template-columns:repeat(2,90px);
-        gap:6px;
-    }
-
-    .target-domino img{
-        width:90px;
-        height:120px;
-    }
-
-    .board-grid{
-        grid-template-columns:repeat(7,65px);
-        gap:2px;
-    }
-
-    .domino img{
-        width:65px;
-        height:87px;
+    .top-bar{
+        padding:4px;
     }
 
     #info{
-        font-size:22px;
+        font-size:20px;
+        margin-bottom:2px;
     }
 
     #timer{
-        font-size:16px;
+        font-size:14px;
+        margin-bottom:3px;
+    }
+
+    .game-container{
+        gap:8px;
+        padding:2px;
+    }
+
+    .targets-panel{
+        width:190px;
+    }
+
+    .targets-title{
+        font-size:20px;
+        margin-bottom:5px;
+    }
+
+    .targets-grid{
+        grid-template-columns:repeat(2,80px);
+        gap:4px;
+    }
+
+    .target-domino img{
+        width:80px;
+        height:107px;
+    }
+
+    .board-grid{
+        grid-template-columns:repeat(7,58px);
+        gap:1px;
+    }
+
+    .domino img{
+        width:58px;
+        height:77px;
     }
 
     #startBtn,
     #resetBtn{
-        font-size:14px;
-        padding:8px 14px;
+        padding:6px 12px;
+        font-size:12px;
     }
 }
 
@@ -217,28 +224,36 @@ body{
 @media screen and (max-width:700px){
 
     .targets-panel{
-        width:180px;
+        width:170px;
     }
 
     .targets-grid{
-        grid-template-columns:repeat(2,75px);
+        grid-template-columns:repeat(2,72px);
     }
 
     .target-domino img{
-        width:75px;
-        height:100px;
+        width:72px;
+        height:96px;
     }
 
     .board-grid{
-        grid-template-columns:repeat(7,55px);
+        grid-template-columns:repeat(7,52px);
     }
 
     .domino img{
-        width:55px;
-        height:73px;
+        width:52px;
+        height:69px;
     }
 
     .targets-title{
-        font-size:20px;
+        font-size:18px;
+    }
+
+    #info{
+        font-size:18px;
+    }
+
+    #timer{
+        font-size:12px;
     }
 }
