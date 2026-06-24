@@ -25,36 +25,36 @@ body {
 
 .top-bar {
     text-align: center;
-    padding: 3px 5px;
+    padding: 4px 5px;
     flex-shrink: 0;
     background: #f2f2f2;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 4px;
     height: auto;
-    min-height: 32px;
+    min-height: 38px;
     border-bottom: 1px solid #ddd;
 }
 
 #info {
-    font-size: clamp(10px, 1.5vh, 18px);
+    font-size: clamp(11px, 1.6vh, 20px);
     margin: 0;
     flex: 1 1 auto;
-    min-width: 60px;
+    min-width: 70px;
 }
 
 #timer {
-    font-size: clamp(9px, 1.3vh, 15px);
+    font-size: clamp(10px, 1.4vh, 17px);
     margin: 0;
     flex: 0 1 auto;
 }
 
 #startBtn,
 #resetBtn {
-    padding: 3px 8px;
-    font-size: clamp(8px, 1.2vh, 13px);
+    padding: 4px 10px;
+    font-size: clamp(9px, 1.3vh, 14px);
     cursor: pointer;
     border: none;
     border-radius: 4px;
@@ -73,31 +73,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    padding: 4px 8px;
-    height: calc(100vh - 40px);
+    gap: 10px;
+    padding: 5px 10px;
+    height: calc(100vh - 45px);
     width: 100%;
     overflow: hidden;
 }
 
 /* ===================================== */
-/* LEFT SIDE - FIXED WIDTH, FULL HEIGHT */
+/* LEFT SIDE - SAME SIZE AS RIGHT */
 /* ===================================== */
 
 .targets-panel {
-    width: clamp(80px, 15vw, 180px);
-    flex-shrink: 0;
-    flex-grow: 0;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     height: 100%;
     overflow: hidden;
     justify-content: center;
+    gap: 4px;
 }
 
 .targets-title {
     text-align: center;
-    font-size: clamp(9px, 1.3vh, 18px);
+    font-size: clamp(10px, 1.5vh, 18px);
     margin-bottom: 4px;
     line-height: 1.2;
     flex-shrink: 0;
@@ -108,13 +107,13 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 4px;
     justify-content: center;
-    flex: 1;
     align-content: center;
-    max-height: 100%;
+    height: auto;
+    flex: 1;
 }
 
 /* ===================================== */
-/* RIGHT SIDE - FLEXIBLE, FITS PERFECTLY */
+/* RIGHT SIDE - SAME SIZE AS LEFT */
 /* ===================================== */
 
 .board-panel {
@@ -130,7 +129,7 @@ body {
 .board-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    gap: 3px;
     justify-content: center;
     width: 100%;
     height: 100%;
@@ -140,7 +139,7 @@ body {
 }
 
 /* ===================================== */
-/* DOMINOES - PERFECT FIT */
+/* DOMINOES - SAME SIZE BOTH SIDES */
 /* ===================================== */
 
 .domino {
@@ -214,15 +213,19 @@ body {
 /* Large screens (desktop/tablet) */
 @media screen and (min-width: 1025px) and (orientation:landscape) {
     .targets-panel {
-        width: 200px;
+        width: 220px;
     }
     
     .targets-title {
-        font-size: 24px;
+        font-size: 28px;
+    }
+    
+    .targets-grid {
+        gap: 8px;
     }
     
     .board-grid {
-        gap: 4px;
+        gap: 5px;
         max-width: 900px;
         max-height: 90%;
     }
@@ -231,76 +234,76 @@ body {
 /* Tablets */
 @media screen and (max-width: 1024px) and (orientation:landscape) {
     .targets-panel {
-        width: 150px;
+        width: 170px;
     }
     
     .targets-title {
-        font-size: 16px;
+        font-size: 18px;
     }
     
     .targets-grid {
-        gap: 3px;
+        gap: 5px;
     }
     
     .board-grid {
-        gap: 2px;
+        gap: 3px;
     }
 }
 
 /* Mobile phones - PERFECT FIT */
 @media screen and (max-width: 900px) and (orientation:landscape) {
     .top-bar {
-        min-height: 28px;
+        min-height: 32px;
         padding: 2px 4px;
     }
     
     #info {
-        font-size: 12px;
+        font-size: 13px;
     }
     
     #timer {
-        font-size: 10px;
+        font-size: 11px;
     }
     
     #startBtn,
     #resetBtn {
-        padding: 2px 6px;
-        font-size: 9px;
+        padding: 3px 8px;
+        font-size: 10px;
     }
     
     .game-container {
-        height: calc(100vh - 34px);
-        gap: 4px;
-        padding: 3px 5px;
+        height: calc(100vh - 38px);
+        gap: 6px;
+        padding: 3px 6px;
     }
     
     .targets-panel {
-        width: 110px;
+        width: 130px;
     }
     
     .targets-title {
-        font-size: 11px;
-        margin-bottom: 2px;
+        font-size: 13px;
+        margin-bottom: 3px;
     }
     
     .targets-grid {
-        gap: 2px;
+        gap: 3px;
     }
     
     .board-grid {
-        gap: 1.5px;
+        gap: 2px;
     }
 }
 
 /* Small phones */
 @media screen and (max-width: 700px) and (orientation:landscape) {
     .top-bar {
-        min-height: 24px;
+        min-height: 28px;
         padding: 2px 3px;
     }
     
     #info {
-        font-size: 10px;
+        font-size: 11px;
     }
     
     #timer {
@@ -309,23 +312,68 @@ body {
     
     #startBtn,
     #resetBtn {
-        padding: 2px 5px;
+        padding: 2px 6px;
         font-size: 8px;
     }
     
     .game-container {
-        height: calc(100vh - 28px);
-        gap: 3px;
+        height: calc(100vh - 32px);
+        gap: 4px;
         padding: 2px 4px;
     }
     
     .targets-panel {
-        width: 85px;
+        width: 100px;
     }
     
     .targets-title {
-        font-size: 9px;
+        font-size: 10px;
         margin-bottom: 2px;
+    }
+    
+    .targets-grid {
+        gap: 2px;
+    }
+    
+    .board-grid {
+        gap: 1.5px;
+    }
+}
+
+/* Very small phones */
+@media screen and (max-width: 500px) and (orientation:landscape) {
+    .top-bar {
+        min-height: 24px;
+        padding: 1px 2px;
+    }
+    
+    #info {
+        font-size: 9px;
+    }
+    
+    #timer {
+        font-size: 8px;
+    }
+    
+    #startBtn,
+    #resetBtn {
+        padding: 2px 5px;
+        font-size: 7px;
+    }
+    
+    .game-container {
+        height: calc(100vh - 26px);
+        gap: 3px;
+        padding: 2px 3px;
+    }
+    
+    .targets-panel {
+        width: 75px;
+    }
+    
+    .targets-title {
+        font-size: 8px;
+        margin-bottom: 1px;
     }
     
     .targets-grid {
@@ -334,51 +382,6 @@ body {
     
     .board-grid {
         gap: 1px;
-    }
-}
-
-/* Very small phones */
-@media screen and (max-width: 500px) and (orientation:landscape) {
-    .top-bar {
-        min-height: 20px;
-        padding: 1px 2px;
-    }
-    
-    #info {
-        font-size: 8px;
-    }
-    
-    #timer {
-        font-size: 7px;
-    }
-    
-    #startBtn,
-    #resetBtn {
-        padding: 1px 4px;
-        font-size: 7px;
-    }
-    
-    .game-container {
-        height: calc(100vh - 22px);
-        gap: 2px;
-        padding: 2px 3px;
-    }
-    
-    .targets-panel {
-        width: 65px;
-    }
-    
-    .targets-title {
-        font-size: 7px;
-        margin-bottom: 1px;
-    }
-    
-    .targets-grid {
-        gap: 1px;
-    }
-    
-    .board-grid {
-        gap: 0.5px;
     }
 }
 
