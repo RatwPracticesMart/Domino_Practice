@@ -1,264 +1,426 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html,
-body{
-    width:100%;
-    height:100%;
-    overflow-x:hidden;
-    font-family:Arial,sans-serif;
-    background:#f2f2f2;
-    color:black;
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Prevent scrolling */
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    color: black;
+    position: fixed;
+    /* Prevent elastic scrolling on mobile */
 }
 
-#rotateWarning{
-    display:none;
+#rotateWarning {
+    display: none;
 }
 
 /* ===================================== */
 /* TOP BAR */
 /* ===================================== */
 
-.top-bar{
-    text-align:center;
-    padding:15px;
+.top-bar {
+    text-align: center;
+    padding: 10px 5px;
+    flex-shrink: 0;
+    /* Prevent shrinking */
 }
 
-#info{
-    font-size:32px;
-    margin-bottom:5px;
+#info {
+    font-size: 28px;
+    margin-bottom: 3px;
 }
 
-#timer{
-    font-size:22px;
-    margin-bottom:10px;
+#timer {
+    font-size: 20px;
+    margin-bottom: 5px;
 }
 
 #startBtn,
-#resetBtn{
-    padding:12px 24px;
-    font-size:18px;
-    cursor:pointer;
-    border:none;
-    border-radius:10px;
-    background:#3b82f6;
-    color:white;
-    margin:5px;
+#resetBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: #3b82f6;
+    color: white;
+    margin: 3px;
+    touch-action: manipulation;
+    /* Better touch response */
 }
 
 #startBtn:hover,
-#resetBtn:hover{
-    opacity:.9;
+#resetBtn:hover {
+    opacity: .9;
 }
 
 /* ===================================== */
-/* MAIN LAYOUT */
+/* MAIN LAYOUT - FIXED TO VIEWPORT */
 /* ===================================== */
 
-.game-container{
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    gap:30px;
-    padding:10px;
-}
-
-/* ===================================== */
-/* LEFT SIDE */
-/* ===================================== */
-
-.targets-panel{
-    width:340px;
-}
-
-.targets-title{
-    text-align:center;
-    font-size:42px;
-    margin-bottom:20px;
-}
-
-.targets-grid{
-    display:grid;
-    grid-template-columns:repeat(2,140px);
-    gap:12px;
-    justify-content:center;
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 5px;
+    height: calc(100vh - 120px);
+    /* Fill remaining height after top bar */
+    overflow: hidden;
+    /* No scrolling */
+    min-height: 0;
+    /* Allow flex shrinking */
 }
 
 /* ===================================== */
-/* RIGHT SIDE */
+/* LEFT SIDE - STAYS FIXED */
 /* ===================================== */
 
-.board-panel{
-    flex:1;
+.targets-panel {
+    width: 280px;
+    flex-shrink: 0;
+    /* Never shrink */
+    flex-grow: 0;
+    /* Never grow */
+    padding-top: 5px;
 }
 
-.board-grid{
-    display:grid;
-    grid-template-columns:repeat(7,120px);
-    gap:4px;
-    justify-content:center;
+.targets-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.targets-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    justify-content: center;
+    max-width: 280px;
+    margin: 0 auto;
 }
 
 /* ===================================== */
-/* DOMINOES */
+/* RIGHT SIDE - ZOOMABLE */
 /* ===================================== */
 
-.domino{
-    position:relative;
-    user-select:none;
-    cursor:pointer;
+.board-panel {
+    flex: 1;
+    min-width: 0;
+    /* Allow shrinking */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    /* No scrolling */
+    height: 100%;
 }
 
-.domino img{
-    display:block;
-    width:120px;
-    height:160px;
+.board-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 7 / 4;
+    /* Maintain board proportions */
 }
 
-.target-domino img{
-    width:140px;
-    height:190px;
+/* ===================================== */
+/* DOMINOES - RESPONSIVE SIZING */
+/* ===================================== */
+
+.domino {
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+    touch-action: manipulation;
+    /* Better touch response */
+    aspect-ratio: 3 / 4;
+    /* Maintain domino proportions */
+    width: 100%;
 }
 
-.overlay{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
+.domino img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.target-domino {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+}
+
+.target-domino img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
 /* ===================================== */
 /* PORTRAIT BLOCK */
 /* ===================================== */
 
-@media screen and (orientation:portrait){
+@media screen and (orientation:portrait) {
 
-    #gameWrapper{
-        display:none;
+    #gameWrapper {
+        display: none;
     }
 
-    #rotateWarning{
-        display:flex;
-        position:fixed;
-        inset:0;
-        background:white;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-        font-size:30px;
-        font-weight:bold;
-        z-index:99999;
+    #rotateWarning {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        background: white;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        z-index: 99999;
+        padding: 20px;
     }
 }
 
 /* ===================================== */
-/* MOBILE LANDSCAPE */
+/* TABLET LANDSCAPE */
 /* ===================================== */
 
-@media screen and (max-width:900px){
-
-    .game-container{
-        gap:10px;
-        padding:5px;
-        align-items:flex-start;
+@media screen and (max-width: 1024px) and (orientation:landscape) {
+    .targets-panel {
+        width: 220px;
     }
 
-    /* LEFT SIDE STAYS BIG */
-
-    .targets-panel{
-        width:220px;
-        flex-shrink:0;
+    .targets-title {
+        font-size: 26px;
     }
 
-    .targets-title{
-        font-size:24px;
-        margin-bottom:10px;
+    .targets-grid {
+        gap: 6px;
     }
 
-    .targets-grid{
-        grid-template-columns:repeat(2,90px);
-        gap:6px;
+    .board-grid {
+        gap: 2px;
+    }
+}
+
+/* ===================================== */
+/* MOBILE LANDSCAPE - FULL HEIGHT */
+/* ===================================== */
+
+@media screen and (max-width: 900px) and (orientation:landscape) {
+
+    .top-bar {
+        padding: 5px 5px;
     }
 
-    .target-domino img{
-        width:90px;
-        height:120px;
+    #info {
+        font-size: 20px;
+        margin-bottom: 2px;
     }
 
-    /* RIGHT SIDE SHRINKS */
-
-    .board-panel{
-        transform:scale(0.75);
-        transform-origin:top left;
-        margin-left:-40px;
-        margin-top:-10px;
-    }
-
-    .board-grid{
-        grid-template-columns:repeat(7,65px);
-        gap:2px;
-    }
-
-    .domino img{
-        width:65px;
-        height:87px;
-    }
-
-    #info{
-        font-size:22px;
-    }
-
-    #timer{
-        font-size:16px;
+    #timer {
+        font-size: 16px;
+        margin-bottom: 3px;
     }
 
     #startBtn,
-    #resetBtn{
-        font-size:14px;
-        padding:8px 14px;
+    #resetBtn {
+        padding: 6px 14px;
+        font-size: 14px;
+        margin: 2px;
+    }
+
+    .game-container {
+        height: calc(100vh - 85px);
+        gap: 10px;
+        padding: 3px;
+    }
+
+    /* LEFT SIDE - Smaller but stays fixed */
+    .targets-panel {
+        width: 160px;
+        flex-shrink: 0;
+        padding-top: 2px;
+    }
+
+    .targets-title {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .targets-grid {
+        gap: 4px;
+        max-width: 160px;
+    }
+
+    /* RIGHT SIDE - Takes remaining space */
+    .board-panel {
+        flex: 1;
+        height: 100%;
+    }
+
+    .board-grid {
+        gap: 2px;
+        max-width: 100%;
+        height: 100%;
     }
 }
 
 /* ===================================== */
-/* VERY SMALL PHONES */
+/* SMALL PHONES LANDSCAPE */
 /* ===================================== */
 
-@media screen and (max-width:700px){
+@media screen and (max-width: 700px) and (orientation:landscape) {
 
-    .targets-panel{
-        width:180px;
+    .top-bar {
+        padding: 3px 3px;
     }
 
-    .targets-grid{
-        grid-template-columns:repeat(2,75px);
+    #info {
+        font-size: 16px;
+        margin-bottom: 1px;
     }
 
-    .target-domino img{
-        width:75px;
-        height:100px;
+    #timer {
+        font-size: 13px;
+        margin-bottom: 2px;
     }
 
-    .targets-title{
-        font-size:20px;
+    #startBtn,
+    #resetBtn {
+        padding: 4px 10px;
+        font-size: 12px;
+        margin: 1px;
     }
 
-    .board-panel{
-        transform:scale(0.65);
-        transform-origin:top left;
-        margin-left:-55px;
-        margin-top:-15px;
+    .game-container {
+        height: calc(100vh - 70px);
+        gap: 5px;
+        padding: 2px;
     }
 
-    .board-grid{
-        grid-template-columns:repeat(7,55px);
+    .targets-panel {
+        width: 120px;
     }
 
-    .domino img{
-        width:55px;
-        height:73px;
+    .targets-title {
+        font-size: 14px;
+        margin-bottom: 3px;
+    }
+
+    .targets-grid {
+        gap: 3px;
+        max-width: 120px;
+    }
+
+    .board-grid {
+        gap: 1px;
+    }
+}
+
+/* ===================================== */
+/* VERY SMALL PHONES LANDSCAPE */
+/* ===================================== */
+
+@media screen and (max-width: 550px) and (orientation:landscape) {
+
+    .top-bar {
+        padding: 2px 2px;
+    }
+
+    #info {
+        font-size: 13px;
+        margin-bottom: 1px;
+    }
+
+    #timer {
+        font-size: 11px;
+        margin-bottom: 1px;
+    }
+
+    #startBtn,
+    #resetBtn {
+        padding: 3px 8px;
+        font-size: 10px;
+        margin: 1px;
+    }
+
+    .game-container {
+        height: calc(100vh - 55px);
+        gap: 3px;
+        padding: 2px;
+    }
+
+    .targets-panel {
+        width: 90px;
+    }
+
+    .targets-title {
+        font-size: 11px;
+        margin-bottom: 2px;
+    }
+
+    .targets-grid {
+        gap: 2px;
+        max-width: 90px;
+    }
+
+    .board-grid {
+        gap: 1px;
+    }
+}
+
+/* ===================================== */
+/* TOUCH FEEDBACK */
+/* ===================================== */
+
+.domino:active {
+    opacity: 0.7;
+    transition: opacity 0.05s;
+}
+
+/* Prevent text selection on double tap */
+.domino,
+.target-domino {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+/* ===================================== */
+/* SAFE AREA FOR NOTCH PHONES */
+/* ===================================== */
+
+@supports (padding: max(0px)) {
+    .top-bar {
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+        padding-top: max(10px, env(safe-area-inset-top));
+    }
+
+    .game-container {
+        padding-left: max(5px, env(safe-area-inset-left));
+        padding-right: max(5px, env(safe-area-inset-right));
+        padding-bottom: max(5px, env(safe-area-inset-bottom));
     }
 }
