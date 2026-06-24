@@ -1,0 +1,155 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:Arial,sans-serif;
+    background:#f2f2f2;
+}
+
+#rotateWarning{
+    display:none;
+}
+
+.top-bar{
+    text-align:center;
+    padding:10px;
+}
+
+#info{
+    font-size:32px;
+}
+
+#timer{
+    margin-top:5px;
+    font-size:20px;
+}
+
+#startBtn,
+#resetBtn{
+    margin-top:10px;
+    padding:10px 20px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#3b82f6;
+    color:white;
+}
+
+.game-container{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:40px;
+    padding:10px;
+}
+
+.targets-panel{
+    width:360px;
+}
+
+.targets-title{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.targets-grid{
+    display:grid;
+    grid-template-columns:repeat(2,140px);
+    justify-content:center;
+    gap:10px;
+}
+
+.board-grid{
+    display:grid;
+    grid-template-columns:repeat(7,120px);
+    gap:5px;
+}
+
+.domino{
+    position:relative;
+}
+
+.domino img{
+    width:120px;
+    height:160px;
+    display:block;
+}
+
+.target-domino img{
+    width:140px;
+    height:190px;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+}
+
+/* PHONE PORTRAIT = BLOCK GAME */
+
+@media screen and (orientation:portrait){
+
+    #gameWrapper{
+        display:none;
+    }
+
+    #rotateWarning{
+        display:flex;
+        position:fixed;
+        inset:0;
+        background:white;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        font-size:32px;
+        font-weight:bold;
+        z-index:99999;
+    }
+}
+
+/* PHONE LANDSCAPE */
+
+@media screen and (orientation:landscape) and (max-width:1000px){
+
+    .game-container{
+        gap:15px;
+    }
+
+    .targets-panel{
+        width:280px;
+    }
+
+    .targets-title{
+        font-size:28px;
+    }
+
+    .targets-grid{
+        grid-template-columns:repeat(2,110px);
+    }
+
+    .target-domino img{
+        width:110px;
+        height:150px;
+    }
+
+    .board-grid{
+        grid-template-columns:repeat(7,90px);
+    }
+
+    .domino img{
+        width:90px;
+        height:120px;
+    }
+}
