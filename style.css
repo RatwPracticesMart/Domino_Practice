@@ -164,10 +164,14 @@ body{
     .game-container{
         gap:10px;
         padding:5px;
+        align-items:flex-start;
     }
+
+    /* LEFT SIDE STAYS BIG */
 
     .targets-panel{
         width:220px;
+        flex-shrink:0;
     }
 
     .targets-title{
@@ -183,6 +187,15 @@ body{
     .target-domino img{
         width:90px;
         height:120px;
+    }
+
+    /* RIGHT SIDE SHRINKS */
+
+    .board-panel{
+        transform:scale(0.75);
+        transform-origin:top left;
+        margin-left:-40px;
+        margin-top:-10px;
     }
 
     .board-grid{
@@ -208,10 +221,6 @@ body{
         font-size:14px;
         padding:8px 14px;
     }
-
-    #zoomControls{
-        margin-top:5px;
-    }
 }
 
 /* ===================================== */
@@ -233,6 +242,17 @@ body{
         height:100px;
     }
 
+    .targets-title{
+        font-size:20px;
+    }
+
+    .board-panel{
+        transform:scale(0.65);
+        transform-origin:top left;
+        margin-left:-55px;
+        margin-top:-15px;
+    }
+
     .board-grid{
         grid-template-columns:repeat(7,55px);
     }
@@ -240,9 +260,5 @@ body{
     .domino img{
         width:55px;
         height:73px;
-    }
-
-    .targets-title{
-        font-size:20px;
     }
 }
