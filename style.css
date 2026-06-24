@@ -18,6 +18,13 @@ body{
     display:none;
 }
 
+:root{
+    --mobile-zoom: 0.70;
+}
+
+#gameWrapper{
+    transform-origin: top center;
+}
 /* ===================================== */
 /* TOP BAR */
 /* ===================================== */
@@ -161,6 +168,11 @@ body{
 
 @media screen and (max-width:900px){
 
+    #gameWrapper{
+        transform: scale(var(--mobile-zoom));
+        width: 143%;
+    }
+
     .game-container{
         gap:10px;
         padding:5px;
@@ -208,6 +220,10 @@ body{
         font-size:14px;
         padding:8px 14px;
     }
+
+    #zoomControls{
+        margin-top:5px;
+    }
 }
 
 /* ===================================== */
@@ -241,4 +257,18 @@ body{
     .targets-title{
         font-size:20px;
     }
+}
+
+#zoomControls{
+    margin-top:8px;
+}
+
+#zoomOutBtn,
+#zoomResetBtn,
+#zoomInBtn{
+    padding:6px 12px;
+    margin:2px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
 }

@@ -383,3 +383,45 @@ document.addEventListener("keydown", (event) => {
 
 infoLabel.textContent = "Press Start";
 timerLabel.textContent = "Time: 0.00";
+
+// ZOOM
+
+let mobileZoom = 0.70;
+
+const zoomOutBtn = document.getElementById("zoomOutBtn");
+const zoomInBtn = document.getElementById("zoomInBtn");
+const zoomResetBtn = document.getElementById("zoomResetBtn");
+
+function updateZoom() {
+
+    document.documentElement.style.setProperty(
+        "--mobile-zoom",
+        mobileZoom
+    );
+
+    zoomResetBtn.textContent =
+        Math.round(mobileZoom * 100) + "%";
+}
+
+zoomOutBtn.addEventListener("click", () => {
+
+    mobileZoom = Math.max(0.40, mobileZoom - 0.05);
+
+    updateZoom();
+});
+
+zoomInBtn.addEventListener("click", () => {
+
+    mobileZoom = Math.min(1.50, mobileZoom + 0.05);
+
+    updateZoom();
+});
+
+zoomResetBtn.addEventListener("click", () => {
+
+    mobileZoom = 0.70;
+
+    updateZoom();
+});
+
+updateZoom();
